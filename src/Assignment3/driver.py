@@ -4,7 +4,7 @@ from src.Assignment3.util import *
 spark=SparkSession.builder.appName("Userlogindetails").getOrCreate()
 
 data = [
-    (1, 101, 'login', '2023-09-05 08:30:00'),
+    (1, 101, 'login', '2023-09-05 08:30:00'), 
     (2, 102, 'click', '2023-09-06 12:45:00'),
     (3, 101, 'click', '2023-09-07 14:15:00'),
     (4, 103, 'login', '2023-09-08 09:00:00'),
