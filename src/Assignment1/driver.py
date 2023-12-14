@@ -6,7 +6,7 @@ spark = SparkSession.builder.appName("Purchase_analysis").getOrCreate()
 purchase_data_df, product_data_df = create_dataframes(spark)
 
 # customers who have bought only product A
-customers_only_product_A = find_customers_only_product_A(purchase_data_df)
+customers_only_product_A = find_customers_only_product_A(purchase_data_df) 
 customers_only_product_A.show()
 
 # customers who upgraded from product B to product E
