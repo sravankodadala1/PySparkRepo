@@ -8,7 +8,7 @@ def create_credit_card_dataframe(spark, data, column_name="card_number"):
 def increase_partitions(dataframe, num_partitions):
     return dataframe.repartition(num_partitions)
 
-def decrease_partitions(dataframe, num_partitions):
+def decrease_partitions(dataframe, num_partitions): 
     return dataframe.coalesce(num_partitions)
 
 def mask_credit_card_udf():
