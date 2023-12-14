@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from src.Assignment2.util import *
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.INFO, 
     format="%(message)s"
 )
 logger = logging.getLogger()
