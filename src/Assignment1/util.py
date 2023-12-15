@@ -31,10 +31,9 @@ def find_customers_only_product_A(purchase_data_df):
         .select("customer")
 
 def find_customers_upgraded_B_to_E(purchase_data_df):
-    return purchase_data_df.alias("p1") \
-        .join(purchase_data_df.alias("p2"), ["customer"]) \
-        .filter("p1.product_model = 'B' and p2.product_model = 'E' and p1.customer = p2.customer") \
-        .select("p1.customer")
+    customers_B = purchase_data_df.filter("product_model = 'B'").select("customer")
+    customers_E = purchase_data_df.filter("product_model = 'E'").select("customer")
+    return customers_B.intersect(customers_E)
 
 def find_customers_all_models(purchase_data_df):
     return purchase_data_df.groupBy("customer") \
