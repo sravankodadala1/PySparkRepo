@@ -43,3 +43,6 @@ def add_load_date_column(df):
 
 def add_date_parts_columns(df):
     return df.withColumn("year", year("load_date")).withColumn("month", month("load_date")).withColumn("day", dayofmonth("load_date"))
+    
+def filter_data_by_id(df, target_id):
+    return df.filter(f"id == '{target_id}'")
