@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 from src.Assignment4.util import *
 
-
+  
 spark = SparkSession.builder.appName("EmployeeDetails").getOrCreate()
 df_with_schema = read_json_with_schema(spark, "C:/Users/sravan/Downloads/Nested_json_file.json")
 
