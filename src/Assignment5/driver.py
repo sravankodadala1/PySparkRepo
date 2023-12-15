@@ -4,7 +4,7 @@ from src.Assignment5.util import *
 
 spark = SparkSession.builder.appName("CreateDataFrames").getOrCreate()
 
-# Define schemas for DataFrames dynamically
+
 employee_schema = define_employee_schema()
 department_schema = define_department_schema()
 country_schema = define_country_schema()
