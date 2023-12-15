@@ -68,7 +68,7 @@ def calculate_avg_salary(employee_df):
     return employee_df.groupBy("department").agg(avg("salary").alias("avg_salary"))
 
 def find_employees_start_with_m(employee_df):
-    # Q3: Find the employee name and department name whose name starts with 'm'
+    #Find the employee name and department name whose name starts with 'm'
     return employee_df.filter(employee_df["employee_name"].startswith("m")).select("employee_name", "department")
 
 def add_bonus_column(employee_df):
