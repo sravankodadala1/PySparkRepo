@@ -2,10 +2,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import count, date_format
 
 
-
-def create_spark_session(app_name):
-    return SparkSession.builder.appName(app_name).getOrCreate()
- 
 def create_dataframe(spark, data, columns):
     return spark.createDataFrame(data, columns)
 
