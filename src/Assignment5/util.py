@@ -1,6 +1,6 @@
 from pyspark.sql.functions import avg, col, current_date
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType
-
+ 
 def define_employee_schema():
     employee_schema = StructType([
         StructField("employee_id", IntegerType(), True),
