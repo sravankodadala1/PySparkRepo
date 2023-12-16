@@ -4,7 +4,7 @@ from src.Assignment3.util import *
 
 class TestUserLoginDetails(unittest.TestCase):
     def setUp(self):
-        self.spark = SparkSession.builder.appName("unittest").getOrCreate()
+        self.spark = SparkSession.builder.appName("unittest").getOrCreate() 
         self.data = [
             (1, 101, 'login', '2023-09-05 08:30:00'),
             (2, 102, 'click', '2023-09-06 12:45:00'),
