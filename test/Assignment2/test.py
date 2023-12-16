@@ -2,31 +2,30 @@ import unittest
 from pyspark.sql import SparkSession
 from src.Assignment2.util import *
 
-class TestCreditCardProcessing(unittest.TestCase):
+class TestUtils(unittest.TestCase):
     def setUp(self):
-        self.spark = SparkSession.builder.appName("unittest").getOrCreate()
-        self.test_data = [("1111222233334444",),
-                          ("5555666677778888",),
-                          ("9999000011112222",),
-                          ("1234567812345678",),
-                          ("9876543210987654",)]
+        self.spark = SparkSession.builder.master("local").appName("test").getOrCreate()
 
     def tearDown(self):
         self.spark.stop()
 
-    def test_create_credit_card_dataframe(self):
-        df = create_credit_card_dataframe(self.spark, self.test_data)
-        self.assertEqual(df.count(), len(self.test_data))
+    def test_read_csv(self):
+        # Test read_csv function
+        input_path = "C:/Users/sravan/Documents/Book1.csv"
+        df = read_csv(self.spark, input_path)
+        self.assertTrue(df is not None)
 
     def test_increase_partitions(self):
-        df = create_credit_card_dataframe(self.spark, self.test_data)
-        df = increase_partitions(df, 5)
-        self.assertEqual(df.rdd.getNumPartitions(), 5)
+        # Test increase_partitions function
+        input_df = self.spark.createDataFrame([(1, "data1"), (2, "data2")], ["id", "data"])
+        increased_df = increase_partitions(input_df, 5)
+        self.assertEqual(increased_df.rdd.getNumPartitions(), 5)
 
-    def test_mask_credit_card_udf(self):
-        mask_udf = mask_credit_card_udf()
-        masked_number = mask_udf("1234567812345678")
-        self.assertEqual(masked_number, "************5678")
+    def test_reduce_partitions(self):
+        # Test reduce_partitions function
+        input_df = self.spark.createDataFrame([(1, "data1"), (2, "data2")], ["id", "data"])
+        reduced_df = reduce_partitions(input_df, 1)
+        self.assertEqual(reduced_df.rdd.getNumPartitions(), 1)
 
 if __name__ == '__main__':
     unittest.main()
