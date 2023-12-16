@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from util import *
 
 class TestEmployeeDetails(unittest.TestCase):
-    @classmethod
+    @classmethod 
     def setUpClass(cls):
         cls.spark = SparkSession.builder.appName("TestEmployeeDetails").getOrCreate()
         cls.json_file_path = "C:/Users/sravan/Downloads/Nested_json_file.json"
