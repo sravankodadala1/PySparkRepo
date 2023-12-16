@@ -11,7 +11,7 @@ record_count_with_schema = df_with_schema.count()
 df_without_schema = read_json_without_schema(spark, "C:/Users/sravan/Downloads/Nested_json_file.json")
 record_count_without_schema = df_without_schema.count()
 
-Flatten the DataFrame with custom schema
+#Flatten the DataFrame with custom schema
 df_flattened = flatten_dataframe(df_with_schema)
 
 #Find record count with and without flattening
