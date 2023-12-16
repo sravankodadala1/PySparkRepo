@@ -1,20 +1,31 @@
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, StringType
 from pyspark.sql.functions import udf
-from pyspark.sql.types import StringType
+import logging
 
 
-def create_credit_card_dataframe(spark, data, column_name="card_number"):
-    return spark.createDataFrame(data, [column_name])
+def read_csv(spark, input_path):
+    schema = StructType([
+        StructField("data", StringType(), True)
+    ])
+    return spark.read.csv(input_path, header=False, schema=schema)
 
-def increase_partitions(dataframe, num_partitions):
-    return dataframe.repartition(num_partitions)
+def mask_card_number(data):
+    if len(data) >= 4:
+        return "*" * (len(data) - 4) + data[-4:]
+    else:
+        return data
 
-def decrease_partitions(dataframe, num_partitions): 
-    return dataframe.coalesce(num_partitions)
+def apply_mask_udf(df):
+    mask_card_udf = udf(mask_card_number, StringType())
+    return df.withColumn("masked_card_number", mask_card_udf("data"))
 
-def mask_credit_card_udf():
-    @udf(StringType())
-    def mask_credit_card(card_number):
-        masked_number = "*" * (len(card_number) - 4) + card_number[-4:]
-        return masked_number
+def increase_partitions(df, num_partitions):
+    return df.repartition(num_partitions)
 
-    return mask_credit_card
+def reduce_partitions(df, num_partitions):
+    return df.coalesce(num_partitions)
+
+def log_partitions(df, message):
+    logger = logging.getLogger(__name__)
+    logger.info(f"{message}: {df.rdd.getNumPartitions()}")
