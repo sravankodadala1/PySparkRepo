@@ -27,7 +27,7 @@ class TestUserLoginDetails(unittest.TestCase):
 
     def test_convert_timestamp_to_login_date(self):
         result_df = convert_timestamp_to_login_date(self.df)
-        self.assertTrue("login_date" in result_df.columns)
+        self.assertTrue("login_date" in result_df.columns) 
         self.assertTrue(result_df.select("login_date").count() == len(self.data))
 
     def test_write_to_csv(self):
