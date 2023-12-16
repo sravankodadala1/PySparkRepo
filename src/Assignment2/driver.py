@@ -1,5 +1,3 @@
-# driver.py
-
 from src.Assignment2.util import *
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
